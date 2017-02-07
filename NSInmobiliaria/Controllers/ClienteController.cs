@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NSInmobiliaria.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +7,7 @@ using System.Web.Mvc;
 
 namespace NSInmobiliaria.Controllers
 {
-    public class PruebaController : Controller
+    public class ClienteController : Controller
     {
         // GET: Prueba
         public ActionResult Index()
@@ -23,7 +24,21 @@ namespace NSInmobiliaria.Controllers
         // GET: Prueba/Create
         public ActionResult Create()
         {
-            return View();
+            using (NSInmobiliariaEntities context = new NSInmobiliariaEntities())
+            {
+                CLIENTES cliente = new CLIENTES
+                {
+                    ID = 1,
+                    NOMBRE = "Evaristo",
+                    APELLIDO = "Marro",
+                    CELULAR = "1153436573",
+                    DIRECCION = "Anchorena 1267 1ºC",
+                    MAIL = "jose.evaristo.marro@gmail.com"
+                };
+                context.CLIENTES.Add(cliente);
+                context.SaveChanges();
+            }
+            return View("Cliente");
         }
 
         // POST: Prueba/Create
